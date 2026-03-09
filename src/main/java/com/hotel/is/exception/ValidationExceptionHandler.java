@@ -17,7 +17,7 @@ public class ValidationExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex){
         Map<String, String> fieldErrors = new HashMap<>();
 
-        for(FieldError fieldError: ex.getBindingResult().getFieldErrors()){
+        for(FieldError fieldError : ex.getBindingResult().getFieldErrors()){
             fieldErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
@@ -28,8 +28,9 @@ public class ValidationExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, Object>> handleRuntimeException (RuntimeException ex){
+    public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex){
         Map<String, Object> response = new HashMap<>();
         response.put("status", "failed");
         response.put("timestamp", LocalDateTime.now());

@@ -1,16 +1,16 @@
 package com.hotel.is.dto;
-//validacijos taisykles
+
 import jakarta.validation.constraints.*;
 
 public class HotelCreateDTO {
-    @NotBlank(message = "A hotel must have name")
+    @NotBlank(message = "A hotel mus have name")
     private String name;
 
     @NotBlank(message = "Must have address")
     private String address;
 
-    @DecimalMin(value = "1.0", message = "Ranking must have above 1")
-    @DecimalMax(value = "5.0", message = "Ranking must have be below 5")
+    @DecimalMin(value="1.0", message = "Ranking must have above 1")
+    @DecimalMax(value="5.0", message = "Ranking must have be below 5")
     private Double rankingAverage;
 
     @NotNull(message = "Must have room price")
@@ -20,8 +20,8 @@ public class HotelCreateDTO {
     private Double priceDiscount;
 
     @NotNull(message = "A hotel must have stars level")
-    @Min(value = 1, message = "Comfort must be at least 1")
-    @Max(value = 7, message = "Comfort must be at most 7")
+    @Min(value=1, message = "Comfort must be at least 1")
+    @Max(value=7, message = "Comfort must be at most 7")
     private Integer comfort;
 
     @NotBlank(message = "A hotel must have summary")

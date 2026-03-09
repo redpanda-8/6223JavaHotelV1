@@ -3,12 +3,14 @@ package com.hotel.is.controllers;
 import com.hotel.is.dao.RoleRepository;
 import com.hotel.is.dao.UserRepository;
 import com.hotel.is.dto.JwtResponse;
+import com.hotel.is.dto.LoginRequest;
 import com.hotel.is.dto.MessageResponse;
 import com.hotel.is.dto.SignupRequest;
 import com.hotel.is.entity.Role;
 import com.hotel.is.entity.User;
 import com.hotel.is.enums.Roles;
 import com.hotel.is.security.jwt.JwtUtils;
+import com.hotel.is.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,27 +48,25 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("signing")
+    @PostMapping("signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest){
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), logi)
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+        String jwt =jwtUtils.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
+        List<String> roles =userDetails.getAuthorities().stream()
                 .map(item->item.getAuthority())
                 .collect(Collectors.toList());
-        return  ResponseEntity.ok(
+        return ResponseEntity.ok(
                 new JwtResponse(jwt,
                         userDetails.getId(),
                         userDetails.getUsername(),
                         userDetails.getEmail(),
                         roles
-                )
-        )
+                ));
     }
-    new UsernamePasswordAuthenticationToken
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest){
@@ -109,15 +110,13 @@ public class AuthController {
                     default:
                         Role userRole = roleRepository.findByName(Roles.ROLE_USER)
                                 .orElseThrow(()->new RuntimeException("Error: Role is not found"));
-
+                        roles.add(userRole);
                 }
             });
         }
 
         user.setRoles(roles);
         userRepository.save(user);
-
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
-
     }
 }

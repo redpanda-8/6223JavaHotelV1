@@ -13,17 +13,17 @@ public class HotelMapper {
         hotel.setAddress(dto.getAddress());
         hotel.setRankingAverage(dto.getRankingAverage());
         hotel.setRoomPrice(dto.getRoomPrice());
-        hotel.setPriceDiscount(dto.getPriceDiscount());
+        hotel.setPriceDoscount(dto.getPriceDiscount());
         hotel.setComfort(dto.getComfort());
         hotel.setSummary(dto.getSummary());
         hotel.setDescription(dto.getDescription());
         hotel.setImageCover(dto.getImageCover());
         hotel.setCreatedAt(LocalDateTime.now());
         hotel.setUpdatedAt(LocalDateTime.now());
-
+        
         return hotel;
     }
-    //response
+
     public static HotelResponseDTO toResponse(Hotel entity){
         HotelResponseDTO dto = new HotelResponseDTO();
         dto.setId(entity.getId());
@@ -31,7 +31,7 @@ public class HotelMapper {
         dto.setAddress(entity.getAddress());
         dto.setRankingAverage(entity.getRankingAverage());
         dto.setRoomPrice(entity.getRoomPrice());
-        dto.setPriceDiscount(entity.getPriceDiscount());
+        dto.setPriceDiscount(entity.getPriceDoscount());
         dto.setComfort(entity.getComfort());
         dto.setSummary(entity.getSummary());
         dto.setDescription(entity.getDescription());

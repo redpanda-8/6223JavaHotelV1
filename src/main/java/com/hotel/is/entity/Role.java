@@ -17,18 +17,18 @@ public class Role {
     public Role(){}
 
     public Role(Roles name){
-        this.name=name;
+        this.name = name;
     }
     public Integer getId(){
         return id;
     }
     public void setId(Integer id){
-        this.id=id;
+        this.id = id;
     }
     public Roles getName(){
         return name;
     }
     public void setName(Roles name){
-        this.name=name;
+        this.name = name;
     }
 }

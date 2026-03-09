@@ -32,7 +32,6 @@ public class HotelServiceImpl implements HotelService {
         }else{
             throw new RuntimeException("Did not find hotel id -" +id);
         }
-
         return hotel;
     }
 
@@ -42,6 +41,6 @@ public class HotelServiceImpl implements HotelService {
     }
     @Override
     public void deleteById(int id){
-
+        hotelRepository.deleteById(id);
     }
 }

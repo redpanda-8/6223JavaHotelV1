@@ -9,6 +9,7 @@ import com.hotel.is.services.HotelService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.node.ObjectNode;
@@ -36,6 +37,7 @@ public class HotelController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Map<String, Object>> findAll(){
         List<HotelResponseDTO> hotels = hotelService.findAll().stream()
                 .map(HotelMapper::toResponse)
@@ -45,7 +47,7 @@ public class HotelController {
                 "result", hotels.size(),
                 "data", hotels
         );
-        return  ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);
     }
     @GetMapping("/{hotelId}")
     public ResponseEntity<HotelResponseDTO> getHotel(@PathVariable int hotelId){
@@ -57,7 +59,7 @@ public class HotelController {
     }
 
     @PostMapping
-    public ResponseEntity<HotelResponseDTO> addHotel(@Valid @RequestBody HotelCreateDTO hotelDTO) {
+    public ResponseEntity<HotelResponseDTO> addHotel(@Valid @RequestBody HotelCreateDTO hotelDTO){
         Hotel saved = hotelService.save(HotelMapper.toEntity(hotelDTO));
         return ResponseEntity.ok(HotelMapper.toResponse(saved));
     }
@@ -93,6 +95,6 @@ public class HotelController {
         }
         hotelService.deleteById(hotelId);
 
-        return ResponseEntity.ok("Deleted hotel id -" +hotelId);
+        return ResponseEntity.ok("Deleted hotel id - " + hotelId);
     }
 }

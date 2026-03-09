@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users",
+@Table(name="users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
@@ -29,20 +29,21 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(max=120)
+    @Size(max = 120)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
+    @JoinTable(name= "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User(){}
-    public User(String userName, String email, String password){
-        this.userName=userName;
-        this.email=email;
-        this.password=password;
+
+    public User (String userName, String email, String password){
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -53,20 +54,20 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

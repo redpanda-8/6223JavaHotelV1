@@ -1,5 +1,6 @@
 package com.hotel.is.entity;
 
+
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="hotels")
 public class Hotel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -26,7 +26,7 @@ public class Hotel {
     private Double roomPrice;
 
     @Column(name="price_discount")
-    private Double priceDiscount;
+    private Double priceDoscount;
 
     @Column(name="comfort")
     private Integer comfort;
@@ -46,21 +46,18 @@ public class Hotel {
     @Column(name="updatedAt")
     private LocalDateTime updatedAt;
 
-    public Hotel(){}; //empty CONSTR
+    public Hotel(){}
 
-    public Hotel(Long id, String name, String address, Double rankingAverage,
-                 Double roomPrice, Double priceDiscount, Integer comfort,
-                 String summary, String description, String imageCover,
-                 LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Hotel(Long id, String name, String address, Double rankingAverage, Double roomPrice, Double priceDoscount, Integer comfort, String description, String summary, String imageCover, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.rankingAverage = rankingAverage;
         this.roomPrice = roomPrice;
-        this.priceDiscount = priceDiscount;
+        this.priceDoscount = priceDoscount;
         this.comfort = comfort;
-        this.summary = summary;
         this.description = description;
+        this.summary = summary;
         this.imageCover = imageCover;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -90,14 +87,6 @@ public class Hotel {
         this.address = address;
     }
 
-    public Double getRankingAverage() {
-        return rankingAverage;
-    }
-
-    public void setRankingAverage(Double rankingAverage) {
-        this.rankingAverage = rankingAverage;
-    }
-
     public Double getRoomPrice() {
         return roomPrice;
     }
@@ -106,20 +95,20 @@ public class Hotel {
         this.roomPrice = roomPrice;
     }
 
-    public Double getPriceDiscount() {
-        return priceDiscount;
+    public Double getRankingAverage() {
+        return rankingAverage;
     }
 
-    public void setPriceDiscount(Double priceDiscount) {
-        this.priceDiscount = priceDiscount;
+    public void setRankingAverage(Double rankingAverage) {
+        this.rankingAverage = rankingAverage;
     }
 
-    public Integer getComfort() {
-        return comfort;
+    public Double getPriceDoscount() {
+        return priceDoscount;
     }
 
-    public void setComfort(Integer comfort) {
-        this.comfort = comfort;
+    public void setPriceDoscount(Double priceDoscount) {
+        this.priceDoscount = priceDoscount;
     }
 
     public String getSummary() {
@@ -128,6 +117,14 @@ public class Hotel {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public Integer getComfort() {
+        return comfort;
+    }
+
+    public void setComfort(Integer comfort) {
+        this.comfort = comfort;
     }
 
     public String getDescription() {
@@ -170,7 +167,7 @@ public class Hotel {
                 ", address='" + address + '\'' +
                 ", rankingAverage=" + rankingAverage +
                 ", roomPrice=" + roomPrice +
-                ", priceDiscount=" + priceDiscount +
+                ", priceDoscount=" + priceDoscount +
                 ", comfort=" + comfort +
                 ", summary='" + summary + '\'' +
                 ", description='" + description + '\'' +
