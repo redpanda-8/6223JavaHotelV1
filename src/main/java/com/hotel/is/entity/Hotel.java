@@ -48,7 +48,10 @@ public class Hotel {
 
     public Hotel(){}; //empty CONSTR
 
-    public Hotel(Long id, String name, String address, Double rankingAverage, Double roomPrice, Double priceDiscount, Integer comfort, String summary, String description, String imageCover, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Hotel(Long id, String name, String address, Double rankingAverage,
+                 Double roomPrice, Double priceDiscount, Integer comfort,
+                 String summary, String description, String imageCover,
+                 LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.address = address;
